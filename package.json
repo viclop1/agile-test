@@ -1,0 +1,19 @@
+{
+  "name": "agile-test",
+  "version": "1.0.0",
+  "description": "API Test CRM service v2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viclop1/agile-test.git"
+  },
+  "author": "Víctor López",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/viclop1/agile-test/issues"
+  },
+  "homepage": "https://github.com/viclop1/agile-test#readme"
+}
