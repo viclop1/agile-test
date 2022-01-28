@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "API Test CRM service v2",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,14 @@
   "bugs": {
     "url": "https://github.com/viclop1/agile-test/issues"
   },
-  "homepage": "https://github.com/viclop1/agile-test#readme"
+  "homepage": "https://github.com/viclop1/agile-test#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "helmet": "^5.0.2",
+    "loglevel": "^1.8.0",
+    "mongoose": "^6.1.8",
+    "morgan": "^1.10.0",
+    "node": "^17.4.0"
+  }
 }
