@@ -50,3 +50,7 @@ export const userMessages = {
   EMAIL_NOT_VALID: 'Email not valid',
   EMPTY_PASSWORD: 'Password is empty'
 }
+
+export const commonMessages = {
+  NOT_VALID_ID: 'Not a valid id received'
+}

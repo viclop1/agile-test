@@ -4,7 +4,7 @@ const router = Router();
 import { check } from 'express-validator';
 
 import * as userController from './../controllers/user.js';
-import {userMessages} from './../config.js';
+import {userMessages, commonMessages} from './../config.js';
 
 import {authJWT, checkSignup, validateBodyFields} from './../middlewares/index.js';
 
@@ -23,7 +23,7 @@ router.get('/', authJWT.verifyToken, authJWT.isAdmin, userController.getUsers);
 
 router.get(
   '/:userId',
-  check('userId', 'The id is not correct').isMongoId(),
+  check('userId', commonMessages.NOT_VALID_ID).isMongoId(),
   authJWT.verifyToken,
   authJWT.isAdmin,
   userController.getUserById
@@ -31,7 +31,7 @@ router.get(
 
 router.put(
   '/:userId',
-  check('userId', 'The id is not correct').isMongoId(),
+  check('userId', commonMessages.NOT_VALID_ID).isMongoId(),
   validateBodyFields,
   authJWT.verifyToken,
   authJWT.isAdmin,
@@ -40,7 +40,7 @@ router.put(
 
 router.put(
   '/:userId/status',
-  check('userId', 'The id is not correct').isMongoId(),
+  check('userId', commonMessages.NOT_VALID_ID).isMongoId(),
   authJWT.verifyToken,
   authJWT.isAdmin,
   userController.updateUserRole
@@ -48,7 +48,7 @@ router.put(
 
 router.delete(
   '/:userId',
-  check('userId', 'The id is not correct').isMongoId(),
+  check('userId', commonMessages.NOT_VALID_ID).isMongoId(),
   authJWT.verifyToken,
   authJWT.isAdmin,
   userController.deleteUser
