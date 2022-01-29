@@ -1,7 +1,9 @@
-import { Schema, model } from 'mongoose'
+import mongoose from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate'
 import bcrypt from 'bcryptjs'
-import { fieldControllers } from '../config';
+import { fieldControllers } from '../config.js';
+
+const { Schema, model } = mongoose;
 
 const userSchema = new Schema(
   {
