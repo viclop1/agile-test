@@ -1,6 +1,8 @@
-import { Schema, model } from 'mongoose'
+import mongoose from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate'
 import {fieldControllers, defaultPhotoURL} from '../config'
+
+const { Schema, model } = mongoose;
 
 const customerSchema = new Schema(
   {

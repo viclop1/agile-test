@@ -1,14 +1,17 @@
-import config from './config'
+import {databaseParams} from './config.js'
 import logger from 'loglevel';
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 mongoose
-  .connect(config.MONGO_URL, {
-    dbName: config.MONGO_DB,
-    useNewUrlParser: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-  })
-  .then(logger.info('Mongo Database connected \n'))
-  .catch((err) => logger.error(err))
+.connect(databaseParams.MONGO_URL, {
+  dbName: databaseParams.MONGO_DB,
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  //family: 4
+}).then(logger.info('Mongo Database connected'))
+  .catch((err) => {
+    logger.error("error connecting db");
+    logger.error(err);
+  });
