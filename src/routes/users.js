@@ -43,7 +43,7 @@ router.put(
 );
 
 router.put(
-  '/:userId/status',
+  '/:userId/role',
   check('userId', commonMessages.NOT_VALID_ID).isMongoId(),
   authJWT.verifyToken,
   authJWT.isAdmin,

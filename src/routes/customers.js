@@ -24,7 +24,10 @@ router.post(
   customerController.createCustomersByCsv
 );
 
-router.get('/', verifyToken, customerController.getCustomers);
+router.get('/',
+  verifyToken,
+  customerController.getCustomers
+);
 
 router.get(
   '/:customerId',

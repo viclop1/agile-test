@@ -7,7 +7,7 @@ export const appParams = {
 
 export const databaseParams = {
   SECRET: process.env.SECRET || 'secret-here',
-  MONGO_URL: process.env.MONGO_URL || 'mongodb://localhost:27019',
+  MONGO_URL: process.env.MONGO_URL || 'mongodb://localhost:27018',
   MONGO_DB: process.env.MONGO_DB || 'agile-test',
 };
 
