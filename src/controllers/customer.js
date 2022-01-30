@@ -4,6 +4,11 @@ import logger from 'loglevel';
 import { readCSV, isEmail, isURL, isValidCustomerName, isValidCustomerSurname } from './utils.js';
 import { response } from './../config.js';
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 export const createCustomer = async (req, res) => {
   try {
     const { name, surname, url } = req.body;
@@ -20,6 +25,11 @@ export const createCustomer = async (req, res) => {
   }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 export const getCustomers = async (req, res) => {
   try {
     const { page, perPage } = req.query;
@@ -37,6 +47,11 @@ export const getCustomers = async (req, res) => {
   }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 export const getCustomerById = async (req, res) => {
   try {
     const { customerId } = req.params;
@@ -52,6 +67,11 @@ export const getCustomerById = async (req, res) => {
   }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 export const getCustomersByCreator = async (req, res) => {
   try {
     const { creatorId } = req.params;
@@ -71,6 +91,11 @@ export const getCustomersByCreator = async (req, res) => {
   }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 export const getCustomersByUpdater = async (req, res) => {
   try {
     const { updaterId } = req.params;
@@ -90,6 +115,11 @@ export const getCustomersByUpdater = async (req, res) => {
   }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 export const updateCustomer = async (req, res) => {
   try {
     const { customerId } = req.params;
@@ -111,6 +141,11 @@ export const updateCustomer = async (req, res) => {
   }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 export const deleteCustomer = async (req, res) => {
   try {
     const { customerId } = req.params;
@@ -124,6 +159,11 @@ export const deleteCustomer = async (req, res) => {
   }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 export const createCustomersByCsv = async (req, res) => {
   try {
     const csv = await readCSV(`src/csvTest/${req.body.fileName}`);
@@ -143,6 +183,11 @@ export const createCustomersByCsv = async (req, res) => {
   }
 }
 
+/**
+ * 
+ * @param {*} csv 
+ * @returns 
+ */
 const checkCsvIsCorrect = (csv) => {
   let errors = '';
   let rowNumber = 1;
@@ -166,6 +211,14 @@ const checkCsvIsCorrect = (csv) => {
   return errors;
 }
 
+/**
+ * 
+ * @param {*} row 
+ * @param {*} errors 
+ * @param {*} emails 
+ * @param {*} rowNumber 
+ * @returns 
+ */
 const checkFieldsFromCsv = (row, errors, emails, rowNumber) => {
   if (!isEmail(row[0])) {
     errors += `First cell in row [${rowNumber}] is not a valid email \n`;
@@ -191,6 +244,12 @@ const checkFieldsFromCsv = (row, errors, emails, rowNumber) => {
   return errors;
 }
 
+/**
+ * 
+ * @param {*} emails 
+ * @param {*} errors 
+ * @returns 
+ */
 const checkRepeatedEmails = async(emails, errors) => {
   const repeatedUsers = await User.find({email: {$in: emails}});
 

@@ -3,6 +3,12 @@ import Role from '../models/role.js';
 import logger from 'loglevel';
 import { response } from '../config.js';
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 export const createUser = async (req, res) => {
   try {
     const { email, password, roles } = req.body;
@@ -29,6 +35,11 @@ export const createUser = async (req, res) => {
   }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 export const getUsers = async (req, res) => {
   try {
     const { page, perPage } = req.query;
@@ -45,6 +56,11 @@ export const getUsers = async (req, res) => {
   }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 export const getUserById = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -58,6 +74,11 @@ export const getUserById = async (req, res) => {
   }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 export const updateUser = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -76,6 +97,11 @@ export const updateUser = async (req, res) => {
   }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 export const updateUserRole = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -100,6 +126,11 @@ export const updateUserRole = async (req, res) => {
   }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 export const deleteUser = async (req, res) => {
   try {
     const { userId } = req.params;

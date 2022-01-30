@@ -3,6 +3,12 @@ import logger from 'loglevel';
 import jwt from 'jsonwebtoken'
 import {databaseParams, response, authMessages, times} from './../config.js'
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 export const login = async (req, res) => {
   try {
     if (!req.body.email || !req.body.password) {

@@ -2,6 +2,12 @@ import fs from 'fs';
 import { parse } from 'csv-parse';
 import { isUri } from  'valid-url';
 
+/**
+ * 
+ * @param {*} date 
+ * @param {*} format 
+ * @returns 
+ */
 export const formatDate = (date, format) => {
     const map = {
         mm: date.getMonth() + 1,
@@ -16,6 +22,11 @@ export const formatDate = (date, format) => {
     return format.replace(/mm|dd|yy|yyyy|HH|MM|SS/gi, matched => map[matched])
 }
 
+/**
+ * 
+ * @param {*} path 
+ * @returns 
+ */
 export const readCSV = async(path) => {
     let csvData = [];
     await new Promise ((resolve) => {
@@ -32,6 +43,11 @@ export const readCSV = async(path) => {
     return csvData;
 }
 
+/**
+ * 
+ * @param {*} email 
+ * @returns 
+ */
 export const isEmail = (email) => {
     return email.toLowerCase()
       .match(
@@ -39,14 +55,29 @@ export const isEmail = (email) => {
       );    
 };
 
+/**
+ * 
+ * @param {*} urlToCheck 
+ * @returns 
+ */
 export const isURL = (urlToCheck) => {
     return isUri(urlToCheck);
 }
 
+/**
+ * 
+ * @param {*} name 
+ * @returns 
+ */
 export const isValidCustomerName = (name) => {
     return typeof name === 'string' && name.length > 2 && name.length < 25;
 }
 
+/**
+ * 
+ * @param {*} surname 
+ * @returns 
+ */
 export const isValidCustomerSurname = (surname) => {
     return typeof surname === 'string' && surname.length > 2 && surname.length < 40;
 }
