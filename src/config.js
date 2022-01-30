@@ -51,6 +51,10 @@ export const userMessages = {
   EMPTY_PASSWORD: 'Password is empty'
 }
 
+export const customerMessages = {
+  CSV_FILE_NAME_REQUIRED: 'The csv filename is required'
+}
+
 export const commonMessages = {
   NOT_VALID_ID: 'Not a valid id received',
   EMAIL_ALREADY_REGISTERED: 'Email already registered',

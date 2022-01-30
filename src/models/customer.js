@@ -1,11 +1,16 @@
 import mongoose from 'mongoose'
 import mongoosePaginate from 'mongoose-paginate'
-import {fieldControllers, defaultPhotoURL} from '../config'
+import {fieldControllers, defaultPhotoURL} from '../config.js'
 
 const { Schema, model } = mongoose;
 
 const customerSchema = new Schema(
   {
+    email: {
+      type: String,
+      required: [true, fieldControllers.EMAIL_REQUIRED],
+      unique: [true, fieldControllers.EMAIL_UNIQUE],
+    },
     name: {
       type: String,
       minlength: 2,

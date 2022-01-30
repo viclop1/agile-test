@@ -3,10 +3,10 @@ const router = Router();
 
 import { check } from 'express-validator';
 
-import * as userController from './../controllers/user.js';
-import {userMessages, commonMessages} from './../config.js';
+import * as userController from '../controllers/user.js';
+import {userMessages, commonMessages} from '../config.js';
 
-import {authJWT, checkSignup, validateBodyFields} from './../middlewares/index.js';
+import {authJWT, checkSignup, validateBodyFields} from '../middlewares/index.js';
 
 router.post(
   '/',
@@ -14,12 +14,16 @@ router.post(
   check('password', userMessages.EMPTY_PASSWORD).not().isEmpty(),
   authJWT.verifyToken,
   authJWT.isAdmin,
-  checkSignup.checkDuplicateEmail,
+  checkSignup.isEmailDuplicated,
   checkSignup.checkValidRoles,
   userController.createUser
-)
+);
 
-router.get('/', authJWT.verifyToken, authJWT.isAdmin, userController.getUsers);
+router.get('/', 
+  authJWT.verifyToken,
+  authJWT.isAdmin,
+  userController.getUsers
+);
 
 router.get(
   '/:userId',

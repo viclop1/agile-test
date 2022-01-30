@@ -1,5 +1,5 @@
 import {validationResult} from 'express-validator';
-import { response } from '../config';
+import { response } from '../config.js';
 
 export const validateBodyFields = (req, res, next) => {
   const errors = validationResult(req);
