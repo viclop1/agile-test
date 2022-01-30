@@ -141,3 +141,8 @@ export const deleteUser = async (req, res) => {
     res.status(response.INTERNAL_SERVER_ERROR).json(error);
   }
 }
+
+export const getAdminUser = async () => {
+  const adminRole = Role.find({name: 'admin'});
+  return User.find({role: adminRole});
+}

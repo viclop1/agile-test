@@ -1,8 +1,9 @@
 import Customer from '../models/customer.js';
 import User from '../models/user.js';
 import logger from 'loglevel';
-import { readCSV, isEmail, isURL, isValidCustomerName, isValidCustomerSurname } from './utils.js';
+import { readCSV, isEmail, isURL, isValidCustomerName, isValidCustomerSurname } from './../utils.js';
 import { response } from './../config.js';
+import {sendEmail} from '../emails.js';
 
 /**
  * 
@@ -168,14 +169,15 @@ export const createCustomersByCsv = async (req, res) => {
   try {
     const csv = await readCSV(`src/csvTest/${req.body.fileName}`);
 
-    const errors = checkCsvIsCorrect(csv);
-    
+    const errors, emails = checkCsvIsCorrect(csv, req.userId);
+    const admin = UserController.getAdminUser();
     if (!errors) {
       //send ok email and create
+      await sendEmail(admin.email, null, emails.length);
       res.status(response.OK).json({ message: 'Customers successfully created' });
     } else {
-      //send email with errors
-      res.status(response.BAD_REQUEST).json("errors");
+      await sendEmail(admin.email, errors, null);
+      res.status(response.BAD_REQUEST).json({ message: errors });
     }
   } catch (error) {
     logger.error(error);
@@ -186,29 +188,47 @@ export const createCustomersByCsv = async (req, res) => {
 /**
  * 
  * @param {*} csv 
+ * @param {*} createdBy 
  * @returns 
  */
-const checkCsvIsCorrect = (csv) => {
+const checkCsvIsCorrect = (csv, createdBy) => {
   let errors = '';
   let rowNumber = 1;
   let emails = [];
 
-  for (const csvRow of csv) {
-    if (csvRow.length > 4) {
-      errors += `The csv contains more fields per row than required. You've passed ${csvRow.length} fields and you should pass 4 -> Email;Name;Surname;URL fields`;
-      break;
-    } else if (csvRow.length < 4) {
-      errors += `The csv contains less fields per row than required. You've passed ${csvRow.length} fields and you should pass 4 -> Email;Name;Surname;URL fields`;
-      break;
-    } else {
+  if (csv && csv.length)  {
+    if (csv[0].length > 4) {
+      errors += `The csv contains more fields per row than required. You've passed ${csv[0].length} fields and you should pass 4 -> Email;Name;Surname;URL fields`;
+    } else if (csv[0].length < 4) {
+      errors += `The csv contains less fields per row than required. You've passed ${csv[0].length} fields and you should pass 4 -> Email;Name;Surname;URL fields`;
+    }
+  }
+
+  if (!errors) {
+    for (const csvRow of csv) {
       //column number is correct.
       errors = checkFieldsFromCsv(csvRow, errors, emails, rowNumber);
       errors = checkRepeatedEmails(emails, errors);
+      rowNumber++;
     }
-    rowNumber++;
   }
 
-  return errors;
+  if (!errors) {
+    for (const csvRow of csv) {
+      const newCustomer = new Customer(
+        csvRow[0],
+        csvRow[1],
+        csvRow[2],
+        csvRow[3],
+      );
+
+      newCustomer.createdBy = createdBy;
+
+      await newCustomer.save();
+    }
+  }
+
+  return errors, emails;
 }
 
 /**

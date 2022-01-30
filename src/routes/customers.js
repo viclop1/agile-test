@@ -18,8 +18,8 @@ router.post(
 );
 
 router.post(
-  '/:csvPath',
-  check('csvPath', customerMessages.CSV_FILE_NAME_REQUIRED).not().isEmpty(),
+  '/csv',
+  check('fileName', customerMessages.CSV_FILE_NAME_REQUIRED).not().isEmpty(),
   verifyToken,
   customerController.createCustomersByCsv
 );

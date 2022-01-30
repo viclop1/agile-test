@@ -1,5 +1,5 @@
 import app from './app.js';
-import {formatDate} from './controllers/utils.js';
+import {formatDate} from './utils.js';
 import logger from 'loglevel';
 import './database.js'
 
