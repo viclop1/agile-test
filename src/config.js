@@ -52,5 +52,7 @@ export const userMessages = {
 }
 
 export const commonMessages = {
-  NOT_VALID_ID: 'Not a valid id received'
+  NOT_VALID_ID: 'Not a valid id received',
+  EMAIL_ALREADY_REGISTERED: 'Email already registered',
+  INVALID_ROLE: 'Invalid role'
 }
